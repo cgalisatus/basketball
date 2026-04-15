@@ -12,20 +12,32 @@
     h1 {
       margin-bottom: 10px;
     }
+
+    .past {
+      opacity: 0.4;
+    }
+
+    .today {
+      font-weight: bold;
+      background: #ffd1a0f4;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
   </style>
 </head>
+
 <body>
 
   <h1>when are we playing basketball??? 🏀</h1>
 
-  <p>
-    <br> thursday april 2
-    <br> monday april 6
-    <br> wednesday april 15
-    <br> monday april 20
-    <br> wednesday april 29
-    <br><br> -- 
-  </p>
+<p id="dates">
+  <br> <span data-date="2026-04-02">thursday april 2</span>
+  <br> <span data-date="2026-04-06">monday april 6</span>
+  <br> <span data-date="2026-04-15">wednesday april 15</span>
+  <br> <span data-date="2026-04-20">monday april 20</span>
+  <br> <span data-date="2026-04-29">wednesday april 29</span>
+  <br><br> -- 
+</p>
 
   <p>
     <b>8pm at highland park rec unless otherwise noted</b>
@@ -34,5 +46,23 @@
     <br> we will do our best to accommodate ( ˘ ³˘)♥︎
   </p>
 
+<script>
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  document.querySelectorAll('[data-date]').forEach(el => {
+    const [year, month, day] = el.dataset.date.split('-');
+    const date = new Date(year, month - 1, day);
+    date.setHours(0,0,0,0);
+
+    if (date < today) {
+      el.classList.add('past');
+    } else if (date.getTime() === today.getTime()) {
+      el.classList.add('today');
+    }
+  });
+</script>
+
 </body>
+
 </html>
